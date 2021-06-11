@@ -10,7 +10,7 @@ class ScrollingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScrollingBinding
 
-    private var longText: Boolean = false
+    private var textToggle = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,15 +20,26 @@ class ScrollingActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         binding.toolbarLayout.title = title
-        binding.content.button.setOnClickListener {
-            when (longText) {
-                true -> binding.content.textView.setText(R.string.small_text)
-                false -> binding.content.textView.setText(R.string.large_text)
-            }
-            longText = !longText
-        }
+//        binding.content.button.setOnClickListener { toggleText() }
+        binding.content.buttonTop.setOnClickListener { toggleText() }
 
         binding.toolbarLayout.adoptScrollingFlagsBasedOn(binding.content.nestedScrollView)
+    }
+
+    private fun toggleText() {
+        textToggle += 1
+        when (textToggle) {
+            0 -> {
+                binding.content.textView.setText(R.string.large_text)
+            }
+            1 -> {
+                binding.content.textView.setText(R.string.medium_text)
+            }
+            else -> {
+                binding.content.textView.setText(R.string.small_text)
+                textToggle = -1
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
