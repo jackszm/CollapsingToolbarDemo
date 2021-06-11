@@ -2,11 +2,13 @@ package com.jsz.collapsingtoolbardemo
 
 import androidx.core.widget.NestedScrollView
 
-private fun NestedScrollView.canScroll(): Boolean {
+fun NestedScrollView.canScroll(): Boolean {
     return getChildAt(0)?.let {
         height < it.height + paddingTop + paddingBottom
     } ?: false
 }
+
+
 
 //view.addOnLayoutChangeListener( new View.OnLayoutChangeListener()
 //{
